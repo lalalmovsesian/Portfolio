@@ -1,0 +1,68 @@
+---
+title: "Alaska commercial salmon catches by management region"
+author: Lala Movsesian
+format: html
+---
+
+# Introduction
+
+This data shows the Alaska commercial salmon catches by management region from 1886 to 1997. This dataset allows us to keep track of changes in salmon abundance in different regions over the years, which has important management, policy making, and conservation implications.
+
+# Data
+
+loading data using URL
+
+```{r}
+catch_original <- read.csv(url("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/df35b.302.1", method = "libcurl"))
+```
+
+# Analysis
+
+loading libraries to explore and organize data
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(readr)
+```
+
+Organize data and calculate mean catch per region
+
+```{r}
+
+
+mean_region <- catch_original %>%  # naming new dataset mean_region
+  select(-All, -notesRegCode) %>%  #removing columns we don't need
+  mutate(Chinook = if_else(Chinook == "I", "1", Chinook)) %>% 
+  mutate(Chinook = as.numeric(Chinook)) %>% #fixing a typo
+  pivot_longer(-c(Region, Year), #changin dataset to long format 
+               names_to = "species", 
+               values_to = "catch") %>%
+  mutate(catch = catch*1000) %>%  #changing unit of fish to thousand
+  group_by(Region) %>%   # separating data per region
+  summarize(mean_catch = mean(catch)) %>% # calculating average catch of each region and putting them all in a column names mean_catch
+  arrange(desc(mean_catch)) # sorting by descending order of mean
+
+head(mean_region) # viewing the results and value type in a table 
+
+
+
+```
+
+# Discussion
+
+Assumptions based on region division and names by Alaska Fish and Game (could not find the region names in the metadata
+
+-   SSE = Southeast region
+-   BRB = Bristol Bay
+-   NSE = Norton Sound and Kotzebue
+-   KOD = Kodiak Island
+-   PWS = Prince William Sound
+-   SOP = ?
+
+Data reveals a significantly larger catch in SSE and BRB compared to other regions. This regional difference can be explained by early life stage survival differences which are usually climate-linked An in depth species-specific analysis can bring more insight into possible habitat shifts due to climate change.
+
+Other possible factors include fishing methods, and presence of hatcheries which have changed throughout the years. For instance, salmon fisheries expanded in PWS in 1970's following the addition of hatchery produced salmon.
+
+Another factor worth noting, is the population and size of the management regions. For example the coastline of NSE exceeds that of California, Oregon, and Washington combined which can significantly increase catch number.
+
