@@ -1,0 +1,12 @@
+---
+title: "Decision Log"
+subtitle: BIOL 806- assignment 8
+author: Lala Movsesian
+format: html
+---
+
+- **Exploring data** - Using Alaska Albers (EPSG code 3338) for the spatial join since it minimalizes the distortion for mapping Alaska.
+
+- **Joining data** - using st_within to join population and region data because we have point data (population) that is completely contained within the polygons (region) what st_within versus st_intersects would give you,
+
+- **Did the ggspatial basemap add value?** No, it did not. Most region points are the same color and just show that population is low
