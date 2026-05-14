@@ -13,6 +13,6 @@ This is my portfolio for learning **R, data analysis, GitHub, and Quarto**.
 
 - Introduction to Literate Analysis Using Quarto 
 [Data wrangling and cleaning](assignments/a01_quarto_literate_analysis.html)
-- Tidy Data
-- Cleaning and Wrangling data
-- Data Visualization
+
+- Spatial data
+[Intro to spatial data](assignments/intro-to-spatial-data.html)
