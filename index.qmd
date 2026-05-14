@@ -1,5 +1,6 @@
 ---
 title: "Portfolio"
+author: "Lala Movsesian"
 listing:
   contents: assignments
   sort: "date asc"
@@ -7,7 +8,8 @@ listing:
 ---
 
 Welcome!  
-This is my portfolio for learning **R, data analysis, GitHub, and Quarto**.
+This is my portfolio for learning **R, data analysis, GitHub, and Quarto** in BIOL806. 
+
 
 ## Course Lessons
 
